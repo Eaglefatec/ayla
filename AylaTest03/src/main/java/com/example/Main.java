@@ -7,6 +7,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        java.util.logging.Logger.getLogger("org.apache.pdfbox").setLevel(java.util.logging.Level.SEVERE);
+        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
+
         // Instancia as nossas classes separadas
         Conexao conexao = new Conexao();
         CadastroCV cadastroService = new CadastroCV();
