@@ -14,10 +14,10 @@ import java.util.Properties;
 public class Conexao {
     private final EmbeddingModel modeloEmbedding;
     private final EmbeddingStore<TextSegment> bancoVetorial;
-    private ChatLanguageModel modeloChat; // Removido o 'final' para permitir a troca em caso de erro
+    private final ChatLanguageModel modeloChat;
 
     public Conexao() {
-        // 1. Mantém o Nomic para a busca vetorial (Postgres)
+        // Mantém o Nomic para a busca vetorial (Postgres)
         this.modeloEmbedding = OllamaEmbeddingModel.builder()
                 .baseUrl("http://localhost:11434")
                 .modelName("nomic-embed-text")
@@ -38,6 +38,14 @@ public class Conexao {
         }
 
         // 4. Configuração do Postgres Local com criação de tabela ativada
+        // Escolha do modelo ollama
+        this.modeloChat = OllamaChatModel.builder()
+                .baseUrl("http://localhost:11434")
+                .modelName("llama3.2")
+                .temperature(0.2)
+                .build();
+
+        // Configuração do Postgres Local
         this.bancoVetorial = PgVectorEmbeddingStore.builder()
                 .host(propriedades.getProperty("db.host"))
                 .port(Integer.parseInt(propriedades.getProperty("db.port")))

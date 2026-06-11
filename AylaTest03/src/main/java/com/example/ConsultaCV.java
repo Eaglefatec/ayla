@@ -11,12 +11,12 @@ public class ConsultaCV {
         var vetorDaBusca = conexao.getModeloEmbedding().embed(buscaDoRecrutador).content();
 
         // Busca os 3 melhores candidatos no Postgres
-        List<EmbeddingMatch<TextSegment>> resultados = conexao.getBancoVetorial().findRelevant(vetorDaBusca, 3, 0.6);
+        List<EmbeddingMatch<TextSegment>> resultados = conexao.getBancoVetorial().findRelevant(vetorDaBusca, 5, 0.6);
 
         if (resultados.isEmpty()) {
             System.out.println("Nenhum currículo compatível encontrado para esta busca.");
         } else {
-            System.out.println("\n--- Candidato(s) Encontrado(s)! Gerando Resumo Prático com Granite 4.1 ---");
+            System.out.println("\n--- Candidato(s) Encontrado(s)! Gerando Resumo Prático ---");
 
             for (EmbeddingMatch<TextSegment> match : resultados) {
                 System.out.println("==================================================");
@@ -37,7 +37,7 @@ public class ConsultaCV {
                         %s
                         """.formatted(buscaDoRecrutador, textoBrutoDoCurriculo);
 
-                System.out.println("O Granite está analisando o perfil... (Aguarde alguns segundos)");
+                System.out.println("A Ayla está analisando o perfil... (Aguarde alguns segundos)");
 
                 // 🚀 CHAMA O GRANITE PARA ENVIAR O RESUMO
                 String resumoDaIA = conexao.getModeloChat().generate(prompt);

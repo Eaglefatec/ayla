@@ -7,6 +7,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        java.util.logging.Logger.getLogger("org.apache.pdfbox").setLevel(java.util.logging.Level.SEVERE);
+        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
+
         // Instancia as nossas classes separadas
         Conexao conexao = new Conexao();
         CadastroCV cadastroService = new CadastroCV();
@@ -16,7 +19,7 @@ public class Main {
 
         while (opcao != 3) {
             System.out.println("\n=================================");
-            System.out.println("    SISTEMA DE RH INTELIGENTE    ");
+            System.out.println("      AYLA - RH INTELIGENTE      ");
             System.out.println("=================================");
             System.out.println("1. Cadastrar Novo Currículo (PDF)");
             System.out.println("2. Consultar Candidatos (Busca Semântica)");
