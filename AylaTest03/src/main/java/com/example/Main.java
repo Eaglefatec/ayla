@@ -16,7 +16,7 @@ public class Main {
 
         while (opcao != 3) {
             System.out.println("\n=================================");
-            System.out.println("    SISTEMA DE RH INTELIGENTE    ");
+            System.out.println("      AYLA - RH INTELIGENTE      ");
             System.out.println("=================================");
             System.out.println("1. Cadastrar Novo Currículo (PDF)");
             System.out.println("2. Consultar Candidatos (Busca Semântica)");
