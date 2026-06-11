@@ -20,11 +20,11 @@ public class Conexao {
                 .modelName("nomic-embed-text")
                 .build();
 
-        // 🚀 ATUALIZADO: Agora usando o Granite da IBM para gerar o resumo prático
+        // Escolha do modelo ollama
         this.modeloChat = OllamaChatModel.builder()
                 .baseUrl("http://localhost:11434")
-                .modelName("granite3.1-dense:2b") // Ajuste o nome exato conforme baixou no Ollama
-                .temperature(0.2)                 // Temperatura baixa deixa o Granite bem preciso
+                .modelName("llama3.2")
+                .temperature(0.2)
                 .build();
 
         // Configuração do Postgres Local
