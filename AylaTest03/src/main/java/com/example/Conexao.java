@@ -14,16 +14,16 @@ import java.util.Properties;
 public class Conexao {
     private final EmbeddingModel modeloEmbedding;
     private final EmbeddingStore<TextSegment> bancoVetorial;
-    private final ChatLanguageModel modeloChat;
+    private final ChatLanguageModel modeloChat; // Mantido como final pois agora só recebe valor UMA vez
 
     public Conexao() {
-        // Mantém o Nomic para a busca vetorial (Postgres)
+        // 1. Mantém o Nomic para a busca vetorial (Postgres)
         this.modeloEmbedding = OllamaEmbeddingModel.builder()
                 .baseUrl("http://localhost:11434")
                 .modelName("nomic-embed-text")
                 .build();
 
-        // 2. Tenta inicializar o Modelo de Chat (Granite com Fallback para Qwen)
+        // 2. Inicializa o Chat de IA usando a lógica de Fallback (Llama3.2 como principal)
         this.modeloChat = inicializarModeloChatComFallback();
 
         // 3. Carrega as configurações do arquivo seguro
@@ -37,15 +37,7 @@ public class Conexao {
             throw new RuntimeException("Erro ao ler propriedades de conexão: " + e.getMessage());
         }
 
-        // 4. Configuração do Postgres Local com criação de tabela ativada
-        // Escolha do modelo ollama
-        this.modeloChat = OllamaChatModel.builder()
-                .baseUrl("http://localhost:11434")
-                .modelName("llama3.2")
-                .temperature(0.2)
-                .build();
-
-        // Configuração do Postgres Local
+        // 4. Configuração do Postgres Local com leitura dinâmica por propriedades
         this.bancoVetorial = PgVectorEmbeddingStore.builder()
                 .host(propriedades.getProperty("db.host"))
                 .port(Integer.parseInt(propriedades.getProperty("db.port")))
@@ -59,11 +51,11 @@ public class Conexao {
     }
 
     /**
-     * Tenta carregar o Granite. Se falhar por falta do modelo, carrega o Qwen automaticamente.
+     * Tenta carregar o Llama 3.2. Se falhar por falta do modelo, carrega o Qwen automaticamente.
      */
     private ChatLanguageModel inicializarModeloChatComFallback() {
-        String modeloPrincipal = "granite3.1-dense:2b";
-        String modeloReserva = "qwen2.5:1.5b"; // Altere para a versão exata do seu Qwen se necessário
+        String modeloPrincipal = "llama3.2";
+        String modeloReserva = "qwen2.5:1.5b";
 
         System.out.println("🤖 Tentando inicializar o modelo de IA principal (" + modeloPrincipal + ")...");
 
