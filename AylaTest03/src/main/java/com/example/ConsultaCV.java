@@ -11,7 +11,7 @@ public class ConsultaCV {
         var vetorDaBusca = conexao.getModeloEmbedding().embed(buscaDoRecrutador).content();
 
         // Busca os 3 melhores candidatos no Postgres
-        List<EmbeddingMatch<TextSegment>> resultados = conexao.getBancoVetorial().findRelevant(vetorDaBusca, 3, 0.6);
+        List<EmbeddingMatch<TextSegment>> resultados = conexao.getBancoVetorial().findRelevant(vetorDaBusca, 5, 0.6);
 
         if (resultados.isEmpty()) {
             System.out.println("Nenhum currículo compatível encontrado para esta busca.");
