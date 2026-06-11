@@ -8,7 +8,7 @@ Filtros tradicionais baseados em palavras-chave exatas geram gargalos operaciona
 ## 🏅 Solução
 A **Ayla** é uma solução inteligente para triagem semântica e síntese de currículos baseada na arquitetura **RAG (Retrieval-Augmented Generation)**. 
 
-A aplicação extrai o texto bruto de PDFs, converte as competências em vetores de contexto por meio do Ollama (IA generativa local) e realiza buscas sofisticadas baseadas em intenção.
+A aplicação extrai o texto bruto de PDFs, converte as competências em vetores de contexto por meio do Ollama (llama 3.2) e realiza buscas sofisticadas baseadas em intenção.
 
 Além de classificar os perfis mais adequados às vagas em linguagem natural, a Ayla gera *insights* automáticos e resumos executivos direcionados para apoiar a tomada de decisão do recrutador.
 
@@ -22,5 +22,3 @@ Como gerente de recrutamento... Quero utilizar uma aplicação em Java que anali
 ![LangChain4j](https://img.shields.io/badge/LangChain4j-blue.svg?style=for-the-badge&logo=java&logoColor=white)
 ![Ollama](https://img.shields.io/badge/Ollama-black.svg?style=for-the-badge&logo=ollama&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-![Jira](https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white)
-
